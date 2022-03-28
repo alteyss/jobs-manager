@@ -70,4 +70,7 @@ php artisan cache:clear
 php artisan config:clear  
 
 php artisan sail:install --devcontainer
+
 ./vendor/bin/sail up   
+
+php artisan migrate
