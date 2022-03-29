@@ -66,11 +66,27 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Perso
 
+### Clear config and cache
+
 php artisan cache:clear  
 php artisan config:clear  
 
-php artisan sail:install --devcontainer
+### Sail
 
+php artisan sail:install --devcontainer
 ./vendor/bin/sail up   
 
+### Migrations
+
+php artisan make:migration:schema create_tags_table --model=0
+php artisan make:migration add_votes_to_users_table --table=users
+
+#### STEP 0. install a 3d party tool to generate migrations
+composer require --dev laracasts/generators
+
+#### STEP 1. create a migration
+php artisan make:migration:schema create_jobs_table --model=0 --schema="name:string:unique,slug:string:unique"
 php artisan migrate
+
+#### STEP 2. create a CRUD for it
+php artisan backpack:crud tag
