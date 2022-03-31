@@ -15,7 +15,7 @@ use App\Http\Controllers\FileController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
 Route::get('/securedfileview', [FileController::class, 'view']);
