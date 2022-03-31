@@ -22,6 +22,11 @@ class Application extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+    
+    protected $casts = [
+        'resume' => 'array',
+        'documents' => 'array'
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +45,7 @@ class Application extends Model
      */
     public function degree()
     {
-        return $this->hasOne(Degree::class);
+        return $this->belongsTo(Degree::class);
     }
 
     /**
@@ -48,7 +53,7 @@ class Application extends Model
      */
     public function state()
     {
-        return $this->hasOne(State::class);
+        return $this->belongsTo(State::class);
     }
 
     /**
@@ -56,7 +61,7 @@ class Application extends Model
      */
     public function region()
     {
-        return $this->hasOne(Region::class);
+        return $this->belongsTo(Region::class);
     }
 
     /**
@@ -64,7 +69,7 @@ class Application extends Model
      */
     public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
     /**
@@ -72,7 +77,7 @@ class Application extends Model
      */
     public function field()
     {
-        return $this->hasOne(Field::class);
+        return $this->belongsTo(Field::class);
     }
 
     /**
@@ -80,7 +85,7 @@ class Application extends Model
      */
     public function job()
     {
-        return $this->hasOne(Job::class);
+        return $this->belongsTo(Job::class);
     }
 
     /*
@@ -100,4 +105,26 @@ class Application extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setResumeAttribute($value)
+    {
+        $attribute_name = "resume";
+        $disk = "local";
+        $destination_path = "resumes";
+
+        $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
+
+        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+    }
+
+    public function setDocumentsAttribute($value)
+    {
+        $attribute_name = "documents";
+        $disk = "local";
+        $destination_path = "documents";
+
+        $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
+
+        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+    }
 }

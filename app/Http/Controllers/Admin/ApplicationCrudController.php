@@ -42,11 +42,6 @@ class ApplicationCrudController extends CrudController
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('email');
-        CRUD::column('comment');
-        CRUD::column('degree_id');
-        CRUD::column('state_id');
-        CRUD::column('region_id');
-        CRUD::column('department_id');
         CRUD::column('field_id');
         CRUD::column('job_id');
         // CRUD::column('created_at');
@@ -57,6 +52,34 @@ class ApplicationCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+    }
+
+    /**
+     * Define what happens when the Show operation is loaded.
+     * 
+     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     * @return void
+     */
+    protected function setupShowOperation()
+    {
+        $this->autoSetupShowOperation();
+
+        CRUD::removeColumn('resume');
+        CRUD::removeColumn('documents');
+
+        CRUD::addColumn([
+            'name'    => 'resume',
+            'label'   => 'CV',
+            'type'    => 'upload_multiple',
+            'disk'    => 'local'
+        ]);
+
+        CRUD::addColumn([
+            'name'    => 'documents',
+            'label'   => 'Documents',
+            'type'    => 'upload_multiple',
+            'disk'    => 'local'
+        ]);
     }
 
     /**
@@ -74,6 +97,14 @@ class ApplicationCrudController extends CrudController
         CRUD::field('email');
         CRUD::field('comment');
         CRUD::addField([
+            'label'     => 'State',
+            'type'      => 'select',
+            'name'      => 'state_id', 
+            'entity'    => 'state', 
+            'attribute' => 'name',
+            'model'     => "App\Models\State",
+        ]);
+        CRUD::addField([
             'label'     => 'Degree',
             'type'      => 'select',
             'name'      => 'degree_id', 
@@ -82,12 +113,50 @@ class ApplicationCrudController extends CrudController
             'model'     => "App\Models\Degree",
         ]);
         CRUD::addField([
-            'label'     => 'State',
+            'label'     => 'Field',
             'type'      => 'select',
-            'name'      => 'state_id', 
-            'entity'    => 'state', 
+            'name'      => 'field_id', 
+            'entity'    => 'field', 
             'attribute' => 'name',
-            'model'     => "App\Models\State",
+            'model'     => "App\Models\Field",
+        ]);
+        CRUD::addField([
+            'label'     => 'Job',
+            'type'      => 'select',
+            'name'      => 'job_id', 
+            'entity'    => 'job', 
+            'attribute' => 'name',
+            'model'     => "App\Models\Job",
+        ]);
+        CRUD::addField([
+            'label'     => 'Region',
+            'type'      => 'select',
+            'name'      => 'region_id', 
+            'entity'    => 'region', 
+            'attribute' => 'name',
+            'model'     => "App\Models\Region",
+        ]);
+        CRUD::addField([
+            'label'     => 'Department',
+            'type'      => 'select',
+            'name'      => 'department_id', 
+            'entity'    => 'department', 
+            'attribute' => 'name',
+            'model'     => "App\Models\Department",
+        ]);
+        CRUD::addField([
+            'name'      => 'resume',
+            'label'     => 'CV',
+            'type'      => 'upload_multiple',
+            'upload'    => true,
+            'disk'      => 'local'
+        ]);
+        CRUD::addField([
+            'name'      => 'documents',
+            'label'     => 'Documents',
+            'type'      => 'upload_multiple',
+            'upload'    => true,
+            'disk'      => 'local'
         ]);
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
