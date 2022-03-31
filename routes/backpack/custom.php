@@ -23,4 +23,5 @@ Route::group([
     Route::crud('department', 'DepartmentCrudController');
     Route::crud('field', 'FieldCrudController');
     Route::crud('job', 'JobCrudController');
+    Route::crud('target', 'TargetCrudController');
 }); // this should be the absolute last line of this file

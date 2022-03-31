@@ -61,10 +61,10 @@ class RegionCrudController extends CrudController
     {
         CRUD::setValidation(RegionRequest::class);
 
-        CRUD::field('id');
+        // CRUD::field('id');
         CRUD::field('name');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // CRUD::field('created_at');
+        // CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
