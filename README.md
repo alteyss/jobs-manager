@@ -94,3 +94,7 @@ php artisan backpack:crud tag
 ### Storage
 
 php artisan storage:link
+
+### Packages
+
+- https://github.com/Laravel-Backpack/PermissionManager
