@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\CopyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/securedfileview', [FileController::class, 'view']);
+Route::get('/application/{id}/copy/{client}', [CopyController::class, 'copy']);

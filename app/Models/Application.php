@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     use CrudTrait;
+    use \Bkwld\Cloner\Cloneable;
 
     /*
     |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ class Application extends Model
         'resume' => 'array',
         'documents' => 'array'
     ];
+
+    protected $cloneable_relations = ['targets'];
 
     /*
     |--------------------------------------------------------------------------
@@ -94,6 +97,14 @@ class Application extends Model
     public function targets()
     {
         return $this->belongsToMany(Target::class);
+    }
+
+    /**
+     * Get the user associated with the application.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /*

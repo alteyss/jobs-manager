@@ -100,3 +100,4 @@ php artisan storage:link
 ### Packages
 
 - https://github.com/Laravel-Backpack/PermissionManager
+- https://github.com/BKWLD/cloner
