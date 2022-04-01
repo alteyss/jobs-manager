@@ -29,6 +29,9 @@ class ApplicationCrudController extends CrudController
         CRUD::setModel(\App\Models\Application::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/application');
         CRUD::setEntityNameStrings('application', 'applications');
+
+        $is_admin = backpack_user()->hasRole('Admin');
+        CRUD::addClause('where', 'user_id', '=', $is_admin ? null : backpack_user()->id);
     }
 
     /**
