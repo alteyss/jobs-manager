@@ -35,6 +35,14 @@ class Target extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * The applications that belong to the target.
+     */
+    public function applications()
+    {
+        return $this->belongsToMany(Application::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -42,8 +42,14 @@ class ApplicationCrudController extends CrudController
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('email');
-        CRUD::column('field_id');
-        CRUD::column('job_id');
+        CRUD::addColumn([
+            'label'     => 'Targets',
+            'type'      => 'select_multiple',
+            'name'      => 'targets',
+            'entity'    => 'targets',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Target',
+        ]);
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
 
@@ -143,6 +149,15 @@ class ApplicationCrudController extends CrudController
             'entity'    => 'department', 
             'attribute' => 'name',
             'model'     => "App\Models\Department",
+        ]);
+        CRUD::addField([
+            'label'     => 'Targets',
+            'type'      => 'select_multiple',
+            'name'      => 'targets', 
+            'entity'    => 'targets',
+            'model'     => "App\Models\Target", 
+            'attribute' => 'name',
+            'pivot'     => true,
         ]);
         CRUD::addField([
             'name'      => 'resume',

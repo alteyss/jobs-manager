@@ -88,6 +88,14 @@ class Application extends Model
         return $this->belongsTo(Job::class);
     }
 
+    /**
+     * The targets that belong to the application.
+     */
+    public function targets()
+    {
+        return $this->belongsToMany(Target::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

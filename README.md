@@ -91,6 +91,8 @@ php artisan make:migration add_votes_to_users_table --table=users
 php artisan migrate
 php artisan backpack:crud tag
 
+php artisan make:migration:pivot table1 table2
+
 ### Storage
 
 php artisan storage:link
