@@ -1,6 +1,8 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('application') }}'><i class='nav-icon la la-paper-plane'></i> Applications</a></li>
+
+@if (backpack_user()->hasRole('Admin'))
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('target') }}'><i class='nav-icon la la-bullseye'></i> Targets</a></li>
 <!-- Users, Roles, Permissions -->
 <li class="nav-item nav-dropdown">
@@ -23,3 +25,4 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('state') }}'><i class='nav-icon la la-check-circle'></i> States</a></li>
     </ul>
 </li>
+@endif

@@ -37,6 +37,32 @@ class Application extends Model
     |--------------------------------------------------------------------------
     */
 
+    public static function boot()
+    {
+        parent::boot();
+        
+        static::deleting(function($obj) {
+            $is_admin = backpack_user()->hasRole('Admin');
+            $is_master = is_null($obj->user_id);
+
+            if ($is_admin && $is_master) {
+                if (count((array)$obj->resume)) {
+                    foreach ($obj->resume as $file_path) {
+                        \Storage::disk('local')->delete($file_path);
+                    }
+                }
+                
+                if (count((array)$obj->documents)) {
+                    foreach ($obj->documents as $file_path) {
+                        \Storage::disk('local')->delete($file_path);
+                    }
+                }
+
+                // todo: remove all children
+            }
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

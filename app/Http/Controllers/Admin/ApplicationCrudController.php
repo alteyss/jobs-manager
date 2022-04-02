@@ -45,6 +45,7 @@ class ApplicationCrudController extends CrudController
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('email');
+        CRUD::column('state');
         CRUD::addColumn([
             'label'     => 'Targets',
             'type'      => 'select_multiple',
@@ -53,10 +54,15 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => 'App\Models\Target',
         ]);
+       
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
 
         $this->crud->addButtonFromView('line', 'copy', 'copy', 'end');
+
+        if (backpack_user()->hasRole('Client')) {
+            $this->crud->removeButton('create');
+        }
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -73,10 +79,18 @@ class ApplicationCrudController extends CrudController
      */
     protected function setupShowOperation()
     {
-        $this->autoSetupShowOperation();
+        // $this->autoSetupShowOperation();
 
-        CRUD::removeColumn('resume');
-        CRUD::removeColumn('documents');
+        $this->setupListOperation();
+
+        // CRUD::removeColumn('resume');
+        // CRUD::removeColumn('documents');
+
+        CRUD::column('degree');
+        CRUD::column('field');
+        CRUD::column('job');
+        CRUD::column('region');
+        CRUD::column('department');
 
         CRUD::addColumn([
             'name'    => 'resume',
@@ -103,10 +117,44 @@ class ApplicationCrudController extends CrudController
     {
         CRUD::setValidation(ApplicationRequest::class);
 
+        if (backpack_user()->hasRole('Client')) {
+            CRUD::addField([
+                'label'     => 'Name',
+                'type'      => 'text',
+                'name'      => 'name', 
+                'attributes' => [
+                    'readonly' => 'readonly',
+                ],
+            ]);
+
+            CRUD::addField([
+                'label'     => 'Email',
+                'type'      => 'text',
+                'name'      => 'email', 
+                'attributes' => [
+                    'readonly' => 'readonly',
+                ]
+            ]);
+
+            CRUD::field('comment');
+
+            CRUD::addField([
+                'label'     => 'State',
+                'type'      => 'select',
+                'name'      => 'state_id', 
+                'entity'    => 'state', 
+                'attribute' => 'name',
+                'model'     => "App\Models\State",
+            ]);
+
+            return;
+        } 
+
         // CRUD::field('id');
         CRUD::field('name');
         CRUD::field('email');
         CRUD::field('comment');
+
         CRUD::addField([
             'label'     => 'State',
             'type'      => 'select',
@@ -115,6 +163,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\State",
         ]);
+
         CRUD::addField([
             'label'     => 'Degree',
             'type'      => 'select',
@@ -123,6 +172,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\Degree",
         ]);
+
         CRUD::addField([
             'label'     => 'Field',
             'type'      => 'select',
@@ -131,6 +181,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\Field",
         ]);
+
         CRUD::addField([
             'label'     => 'Job',
             'type'      => 'select',
@@ -139,6 +190,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\Job",
         ]);
+
         CRUD::addField([
             'label'     => 'Region',
             'type'      => 'select',
@@ -147,6 +199,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\Region",
         ]);
+
         CRUD::addField([
             'label'     => 'Department',
             'type'      => 'select',
@@ -155,6 +208,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'model'     => "App\Models\Department",
         ]);
+
         CRUD::addField([
             'label'     => 'Targets',
             'type'      => 'select_multiple',
@@ -164,6 +218,7 @@ class ApplicationCrudController extends CrudController
             'attribute' => 'name',
             'pivot'     => true,
         ]);
+
         CRUD::addField([
             'name'      => 'resume',
             'label'     => 'CV',
@@ -171,6 +226,7 @@ class ApplicationCrudController extends CrudController
             'upload'    => true,
             'disk'      => 'local'
         ]);
+        
         CRUD::addField([
             'name'      => 'documents',
             'label'     => 'Documents',
@@ -178,6 +234,7 @@ class ApplicationCrudController extends CrudController
             'upload'    => true,
             'disk'      => 'local'
         ]);
+        
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 
