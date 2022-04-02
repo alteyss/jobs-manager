@@ -28,7 +28,7 @@ class FieldCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Field::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/field');
-        CRUD::setEntityNameStrings('field', 'fields');
+        CRUD::setEntityNameStrings(trans('base.field'), trans('base.fields'));
     }
 
     /**

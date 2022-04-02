@@ -28,7 +28,7 @@ class RegionCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Region::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/region');
-        CRUD::setEntityNameStrings('region', 'regions');
+        CRUD::setEntityNameStrings(trans('base.region'), trans('base.regions'));
     }
 
     /**

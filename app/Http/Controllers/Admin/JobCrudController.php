@@ -28,7 +28,7 @@ class JobCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Job::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/job');
-        CRUD::setEntityNameStrings('job', 'jobs');
+        CRUD::setEntityNameStrings(trans('base.job'), trans('base.jobs'));
     }
 
     /**

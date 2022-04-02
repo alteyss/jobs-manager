@@ -28,7 +28,7 @@ class ApplicationCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Application::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/application');
-        CRUD::setEntityNameStrings('application', 'applications');
+        CRUD::setEntityNameStrings(trans('base.application'), trans('base.applications'));
 
         $is_admin = backpack_user()->hasRole('Admin');
         CRUD::addClause('where', 'user_id', '=', $is_admin ? null : backpack_user()->id);
@@ -43,11 +43,27 @@ class ApplicationCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('id');
-        CRUD::column('name');
-        CRUD::column('email');
-        CRUD::column('state');
+
         CRUD::addColumn([
-            'label'     => 'Targets',
+            'label'     => trans('base.name'),
+            'type'      => 'text',
+            'name'      => 'name',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.email'),
+            'type'      => 'text',
+            'name'      => 'email',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.state'),
+            'type'      => 'text',
+            'name'      => 'state',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.targets'),
             'type'      => 'select_multiple',
             'name'      => 'targets',
             'entity'    => 'targets',
@@ -86,22 +102,46 @@ class ApplicationCrudController extends CrudController
         // CRUD::removeColumn('resume');
         // CRUD::removeColumn('documents');
 
-        CRUD::column('degree');
-        CRUD::column('field');
-        CRUD::column('job');
-        CRUD::column('region');
-        CRUD::column('department');
+        CRUD::addColumn([
+            'label'     => trans('base.degree'),
+            'type'      => 'text',
+            'name'      => 'degree',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.field'),
+            'type'      => 'text',
+            'name'      => 'field',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.job'),
+            'type'      => 'text',
+            'name'      => 'job',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.region'),
+            'type'      => 'text',
+            'name'      => 'region',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.department'),
+            'type'      => 'text',
+            'name'      => 'department',
+        ]);
 
         CRUD::addColumn([
             'name'    => 'resume',
-            'label'   => 'CV',
+            'label'   => trans('base.resume'),
             'type'    => 'upload_multiple',
             'disk'    => 'local'
         ]);
 
         CRUD::addColumn([
             'name'    => 'documents',
-            'label'   => 'Documents',
+            'label'   => trans('base.documents'),
             'type'    => 'upload_multiple',
             'disk'    => 'local'
         ]);
@@ -119,7 +159,7 @@ class ApplicationCrudController extends CrudController
 
         if (backpack_user()->hasRole('Client')) {
             CRUD::addField([
-                'label'     => 'Name',
+                'label'     => trans('base.name'),
                 'type'      => 'text',
                 'name'      => 'name', 
                 'attributes' => [
@@ -128,7 +168,7 @@ class ApplicationCrudController extends CrudController
             ]);
 
             CRUD::addField([
-                'label'     => 'Email',
+                'label'     => trans('base.email'),
                 'type'      => 'text',
                 'name'      => 'email', 
                 'attributes' => [
@@ -139,7 +179,7 @@ class ApplicationCrudController extends CrudController
             CRUD::field('comment');
 
             CRUD::addField([
-                'label'     => 'State',
+                'label'     => trans('base.state'),
                 'type'      => 'select',
                 'name'      => 'state_id', 
                 'entity'    => 'state', 
@@ -151,12 +191,27 @@ class ApplicationCrudController extends CrudController
         } 
 
         // CRUD::field('id');
-        CRUD::field('name');
-        CRUD::field('email');
-        CRUD::field('comment');
 
         CRUD::addField([
-            'label'     => 'State',
+            'label'     => trans('base.name'),
+            'type'      => 'text',
+            'name'      => 'name', 
+        ]);
+
+        CRUD::addField([
+            'label'     => trans('base.email'),
+            'type'      => 'text',
+            'name'      => 'email', 
+        ]);
+
+        CRUD::addField([
+            'label'     => trans('base.comment'),
+            'type'      => 'text',
+            'name'      => 'comment', 
+        ]);
+
+        CRUD::addField([
+            'label'     => trans('base.state'),
             'type'      => 'select',
             'name'      => 'state_id', 
             'entity'    => 'state', 
@@ -165,7 +220,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Degree',
+            'label'     => trans('base.degree'),
             'type'      => 'select',
             'name'      => 'degree_id', 
             'entity'    => 'degree', 
@@ -174,7 +229,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Field',
+            'label'     => trans('base.field'),
             'type'      => 'select',
             'name'      => 'field_id', 
             'entity'    => 'field', 
@@ -183,7 +238,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Job',
+            'label'     => trans('base.job'),
             'type'      => 'select',
             'name'      => 'job_id', 
             'entity'    => 'job', 
@@ -192,7 +247,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Region',
+            'label'     => trans('base.region'),
             'type'      => 'select',
             'name'      => 'region_id', 
             'entity'    => 'region', 
@@ -201,7 +256,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Department',
+            'label'     => trans('base.department'),
             'type'      => 'select',
             'name'      => 'department_id', 
             'entity'    => 'department', 
@@ -210,7 +265,7 @@ class ApplicationCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'label'     => 'Targets',
+            'label'     => trans('base.targets'),
             'type'      => 'select_multiple',
             'name'      => 'targets', 
             'entity'    => 'targets',
@@ -221,7 +276,7 @@ class ApplicationCrudController extends CrudController
 
         CRUD::addField([
             'name'      => 'resume',
-            'label'     => 'CV',
+            'label'     => trans('base.resume'),
             'type'      => 'upload_multiple',
             'upload'    => true,
             'disk'      => 'local'
@@ -229,7 +284,7 @@ class ApplicationCrudController extends CrudController
         
         CRUD::addField([
             'name'      => 'documents',
-            'label'     => 'Documents',
+            'label'     => trans('base.documents'),
             'type'      => 'upload_multiple',
             'upload'    => true,
             'disk'      => 'local'

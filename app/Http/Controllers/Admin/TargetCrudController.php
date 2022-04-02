@@ -28,7 +28,7 @@ class TargetCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Target::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/target');
-        CRUD::setEntityNameStrings('target', 'targets');
+        CRUD::setEntityNameStrings(trans('base.target'), trans('base.targets'));
     }
 
     /**

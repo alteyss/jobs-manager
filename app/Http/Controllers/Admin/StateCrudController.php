@@ -28,7 +28,7 @@ class StateCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\State::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/state');
-        CRUD::setEntityNameStrings('state', 'states');
+        CRUD::setEntityNameStrings(trans('base.state'), trans('base.states'));
     }
 
     /**

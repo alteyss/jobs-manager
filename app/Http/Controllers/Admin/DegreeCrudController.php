@@ -28,7 +28,7 @@ class DegreeCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Degree::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/degree');
-        CRUD::setEntityNameStrings('degree', 'degrees');
+        CRUD::setEntityNameStrings(trans('base.degree'), trans('base.degrees'));
     }
 
     /**
