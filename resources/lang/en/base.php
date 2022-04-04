@@ -4,6 +4,7 @@ return [
     'customers' => 'Customers',
     'name' => 'Name',
     'email' => 'Email',
+    'target' => 'Target',
     'targets' => 'Targets',
     'state' => 'State',
     'states' => 'States',

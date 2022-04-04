@@ -58,8 +58,11 @@ class ApplicationCrudController extends CrudController
 
         CRUD::addColumn([
             'label'     => trans('base.state'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'state',
+            'entity'    => 'state',
+            'attribute' => 'name',
+            'model'     => 'App\Models\State',
         ]);
 
         CRUD::addColumn([
@@ -104,32 +107,47 @@ class ApplicationCrudController extends CrudController
 
         CRUD::addColumn([
             'label'     => trans('base.degree'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'degree',
+            'entity'    => 'degree',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Degree',
         ]);
 
         CRUD::addColumn([
             'label'     => trans('base.field'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'field',
+            'entity'    => 'field',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Field',
         ]);
 
         CRUD::addColumn([
             'label'     => trans('base.job'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'job',
+            'entity'    => 'job',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Job',
         ]);
 
         CRUD::addColumn([
             'label'     => trans('base.region'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'region',
+            'entity'    => 'region',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Region',
         ]);
 
         CRUD::addColumn([
             'label'     => trans('base.department'),
-            'type'      => 'text',
+            'type'      => 'select',
             'name'      => 'department',
+            'entity'    => 'department',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Department',
         ]);
 
         CRUD::addColumn([
