@@ -4,15 +4,6 @@
 
 @if (backpack_user()->hasRole('Admin'))
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('target') }}'><i class='nav-icon la la-bullseye'></i> {{ trans('base.targets') }}</a></li>
-<!-- Users, Roles, Permissions -->
-<li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> {{ trans('base.authentication') }}</a>
-    <ul class="nav-dropdown-items">
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>{{ trans('backpack::permissionmanager.users') }}</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>{{ trans('backpack::permissionmanager.roles') }}</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{ trans('base.permissions') }}</span></a></li>
-    </ul>
-</li>
 <!-- All models -->
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> {{ trans('base.models') }}</a>
@@ -23,6 +14,15 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('field') }}'><i class='nav-icon la la-building'></i> {{ trans('base.fields') }}</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('job') }}'><i class='nav-icon la la-suitcase'></i> {{ trans('base.jobs') }}</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('state') }}'><i class='nav-icon la la-check-circle'></i> {{ trans('base.states') }}</a></li>
+    </ul>
+</li>
+<!-- Users, Roles, Permissions -->
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> {{ trans('base.authentication') }}</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>{{ trans('backpack::permissionmanager.users') }}</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>{{ trans('backpack::permissionmanager.roles') }}</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{ trans('base.permissions') }}</span></a></li>
     </ul>
 </li>
 @endif

@@ -41,6 +41,7 @@ class StateCrudController extends CrudController
     {
         CRUD::column('id');
         CRUD::column('name');
+        CRUD::column('color');
         // CRUD::column('created_at');
         // CRUD::column('updated_at');
 
@@ -62,7 +63,16 @@ class StateCrudController extends CrudController
         CRUD::setValidation(StateRequest::class);
 
         // CRUD::field('id');
+
         CRUD::field('name');
+
+        CRUD::addField([
+            'name'    => 'color',
+            'label'   => 'Background Color',
+            'type'    => 'color',
+            'default' => '#000000',
+        ]);
+
         // CRUD::field('created_at');
         // CRUD::field('updated_at');
 
