@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ApplicationRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\State;
+use App\Models\Target;
+use App\Models\User;
+use App\Models\Field;
+use App\Models\Job;
+use App\Models\Degree;
+use App\Models\Region;
+use App\Models\Department;
 
 /**
  * Class ApplicationCrudController
@@ -31,7 +39,10 @@ class ApplicationCrudController extends CrudController
         CRUD::setEntityNameStrings(trans('base.application'), trans('base.applications'));
 
         $is_admin = backpack_user()->hasRole('Admin');
-        CRUD::addClause('where', 'user_id', '=', $is_admin ? null : backpack_user()->id);
+
+        if (!$is_admin) {
+            CRUD::addClause('where', 'user_id', '=', backpack_user()->id);
+        }
     }
 
     /**
@@ -42,6 +53,8 @@ class ApplicationCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $is_admin = backpack_user()->hasRole('Admin');
+
         CRUD::column('id');
 
         CRUD::addColumn([
@@ -55,6 +68,17 @@ class ApplicationCrudController extends CrudController
             'type'      => 'text',
             'name'      => 'email',
         ]);
+
+        if ($is_admin) {
+            CRUD::addColumn([
+                'label'     => trans('base.customer'),
+                'type'      => 'select',
+                'name'      => 'user',
+                'entity'    => 'user',
+                'attribute' => 'name',
+                'model'     => 'App\Models\User',
+            ]);
+        }
 
         CRUD::addColumn([
             'label'     => trans('base.state'),
@@ -88,6 +112,92 @@ class ApplicationCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+
+        if ($is_admin) {
+            $this->crud->addFilter([
+                'name'  => 'user_id',
+                'type'  => 'select2',
+                'label' => trans('base.customer')
+            ], function () {
+                return User::all()->keyBy('id')->pluck('name', 'id')->toArray();
+            }, function ($value) { // if the filter is active
+                $this->crud->addClause('where', 'user_id', $value);
+            });
+        }
+
+        $this->crud->addFilter([
+            'name'  => 'targets',
+            'type'  => 'select2_multiple',
+            'label' => trans('base.targets')
+        ], function() {
+            return Target::all()->pluck('name', 'id')->toArray();
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('targets', function ($query) use ($value) {
+                    $query->where('target_id', $value);
+                });
+            }
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'state_id',
+            'type'  => 'select2',
+            'label' => trans('base.state')
+        ], function () {
+            return State::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'state_id', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'field_id',
+            'type'  => 'select2',
+            'label' => trans('base.field')
+        ], function () {
+            return Field::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'field_id', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'job_id',
+            'type'  => 'select2',
+            'label' => trans('base.job')
+        ], function () {
+            return Job::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'job_id', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'degree_id',
+            'type'  => 'select2',
+            'label' => trans('base.degree')
+        ], function () {
+            return Degree::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'degree_id', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'region_id',
+            'type'  => 'select2',
+            'label' => trans('base.region')
+        ], function () {
+            return Region::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'region_id', $value);
+        });
+
+        $this->crud->addFilter([
+            'name'  => 'department_id',
+            'type'  => 'select2',
+            'label' => trans('base.department')
+        ], function () {
+            return Department::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'department_id', $value);
+        });
     }
 
     /**

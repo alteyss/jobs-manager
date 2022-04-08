@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'customer' => 'Client',
     'customers' => 'Clients',
     'name' => 'Nom',
     'email' => 'Email',

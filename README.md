@@ -97,6 +97,24 @@ php artisan make:migration:pivot table1 table2
 
 php artisan storage:link
 
+### Pro
+
+```code
+composer config http-basic.backpackforlaravel.com [your-token-username] [your-token-password]
+
+"repositories": [
+    {
+        "type": "composer",
+        "url": "https://repo.backpackforlaravel.com/"
+    }
+],
+
+composer require backpack/pro
+```
+
+
+```composer config http-basic.backpackforlaravel.com [your-token-username] [your-token-password]```
+
 ### Packages
 
 - https://github.com/Laravel-Backpack/PermissionManager
