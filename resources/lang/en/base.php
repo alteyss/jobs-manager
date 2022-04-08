@@ -26,4 +26,5 @@ return [
     'documents' => 'Documents',
     'authentication' => 'Authentication',
     'permissions' => 'Permissions',
+    'application_copy_success' => 'Application successfully created!'
 ];

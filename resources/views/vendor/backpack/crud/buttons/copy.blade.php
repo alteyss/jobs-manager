@@ -48,7 +48,7 @@ $users = User::role('client')->get();
 
         new Noty({
             type: "success",
-            text: 'Application copied',
+            text:  "{{ trans('base.application_copy_success') }}",
         }).show();
     }
 </script>

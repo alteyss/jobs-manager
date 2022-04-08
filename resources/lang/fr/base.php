@@ -26,4 +26,5 @@ return [
     'documents' => 'Documents',
     'authentication' => 'Authentification',
     'permissions' => 'Permissions',
+    'application_copy_success' => 'Candidature créée avec succès !'
 ];
