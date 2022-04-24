@@ -40,9 +40,9 @@ $users = User::role('client')->get();
     function copyInit(applicationId) {
         var clientId = document.getElementById("clientSelect-" + applicationId).value;
 
-        // window.open(window.origin + '/application/' + applicationId + '/copy/' + client, '_blank').focus();
+        // window.open(window.origin + '/copy/' + applicationId + '/' + client, '_blank').focus();
 
-        fetch(window.origin + '/application/' + applicationId + '/copy/' + clientId);
+        fetch(window.origin + '/copy/' + applicationId + '/' + clientId);
 
         $('#copyModal-' + applicationId).modal('hide');
 

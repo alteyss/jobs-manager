@@ -112,7 +112,6 @@ composer config http-basic.backpackforlaravel.com [your-token-username] [your-to
 composer require backpack/pro
 ```
 
-
 ```composer config http-basic.backpackforlaravel.com [your-token-username] [your-token-password]```
 
 ### Packages

@@ -57,8 +57,6 @@ class Application extends Model
                         \Storage::disk('local')->delete($file_path);
                     }
                 }
-
-                // todo: remove all children
             }
         });
     }
@@ -151,25 +149,33 @@ class Application extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function setResumeAttribute($value)
+    public function setResumeAttribute($value, $ignore = false)
     {
-        $attribute_name = "resume";
-        $disk = "local";
-        $destination_path = "resumes";
+        if ($ignore) {
+            $this->attributes['resume'] = json_encode($value);
+        } else {
+            $attribute_name = "resume";
+            $disk = "local";
+            $destination_path = "resumes";
 
-        $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
+            $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
 
-        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+            // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+        }
     }
 
-    public function setDocumentsAttribute($value)
+    public function setDocumentsAttribute($value, $ignore = false)
     {
-        $attribute_name = "documents";
-        $disk = "local";
-        $destination_path = "documents";
-
-        $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
-
-        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+        if ($ignore) {
+            $this->attributes['documents'] = json_encode($value);
+        } else {
+            $attribute_name = "documents";
+            $disk = "local";
+            $destination_path = "documents";
+    
+            $this->uploadMultipleFilesToDisk($value, $attribute_name, $disk, $destination_path);
+    
+            // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+        }
     }
 }

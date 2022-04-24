@@ -58,6 +58,13 @@ class ApplicationCrudController extends CrudController
         CRUD::column('id');
 
         CRUD::addColumn([
+            'name'  => 'created_at', // The db column name
+            'label' => 'Date', // Table column heading
+            'type'  => 'date',
+            // 'format' => 'l j F Y', // use something else than the base.default_date_format config value
+        ]);
+
+        CRUD::addColumn([
             'label'     => trans('base.name'),
             'type'      => 'text',
             'name'      => 'name',
@@ -119,9 +126,17 @@ class ApplicationCrudController extends CrudController
                 'type'  => 'select2',
                 'label' => trans('base.customer')
             ], function () {
-                return User::all()->keyBy('id')->pluck('name', 'id')->toArray();
+                return User::whereHas('roles', function($q) {
+                    $q->where('name', 'Client');
+                })->get()->keyBy('id')->pluck('name', 'id')->toArray();
             }, function ($value) { // if the filter is active
                 $this->crud->addClause('where', 'user_id', $value);
+            }, function () { // if the filter is not active
+                $is_admin = backpack_user()->hasRole('Admin');
+
+                if ($is_admin) {
+                    CRUD::addClause('where', 'user_id', '=', null);
+                } 
             });
         }
 
