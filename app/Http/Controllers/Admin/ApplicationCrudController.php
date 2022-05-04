@@ -225,10 +225,57 @@ class ApplicationCrudController extends CrudController
     {
         // $this->autoSetupShowOperation();
 
-        $this->setupListOperation();
+        $is_admin = backpack_user()->hasRole('Admin');
 
-        // CRUD::removeColumn('resume');
-        // CRUD::removeColumn('documents');
+        CRUD::column('id');
+        
+        CRUD::addColumn([
+            'name'  => 'created_at', // The db column name
+            'label' => 'Date', // Table column heading
+            'type'  => 'date',
+            // 'format' => 'l j F Y', // use something else than the base.default_date_format config value
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.name'),
+            'type'      => 'text',
+            'name'      => 'name',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.email'),
+            'type'      => 'text',
+            'name'      => 'email',
+        ]);
+
+        if ($is_admin) {
+            CRUD::addColumn([
+                'label'     => trans('base.customer'),
+                'type'      => 'select',
+                'name'      => 'user',
+                'entity'    => 'user',
+                'attribute' => 'name',
+                'model'     => 'App\Models\User',
+            ]);
+        }
+
+        CRUD::addColumn([
+            'label'     => trans('base.state'),
+            'type'      => 'select',
+            'name'      => 'state',
+            'entity'    => 'state',
+            'attribute' => 'name',
+            'model'     => 'App\Models\State',
+        ]);
+
+        CRUD::addColumn([
+            'label'     => trans('base.targets'),
+            'type'      => 'select_multiple',
+            'name'      => 'targets',
+            'entity'    => 'targets',
+            'attribute' => 'name',
+            'model'     => 'App\Models\Target',
+        ]);
 
         CRUD::addColumn([
             'label'     => trans('base.degree'),

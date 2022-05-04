@@ -117,4 +117,5 @@ composer require backpack/pro
 ### Packages
 
 - https://github.com/Laravel-Backpack/PermissionManager
+- https://github.com/Laravel-Backpack/LogManager
 - https://github.com/BKWLD/cloner

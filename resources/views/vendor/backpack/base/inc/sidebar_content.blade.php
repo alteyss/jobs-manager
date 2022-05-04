@@ -6,7 +6,7 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('target') }}'><i class='nav-icon la la-bullseye'></i> {{ trans('base.targets') }}</a></li>
 <!-- All models -->
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> {{ trans('base.models') }}</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-database"></i> {{ trans('base.models') }}</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('degree') }}'><i class='nav-icon la la-graduation-cap'></i> {{ trans('base.degrees') }}</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('region') }}'><i class='nav-icon la la-map-marked'></i> {{ trans('base.regions') }}</a></li>
@@ -25,4 +25,5 @@
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{ trans('base.permissions') }}</span></a></li>
     </ul>
 </li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Logs</a></li>
 @endif
