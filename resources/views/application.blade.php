@@ -53,25 +53,25 @@
                     </div>
                     <div class="form-group">
                         <label for="inputEmail">E-mail <small class="text-default">*</small></label>
-                        <input type="email" class="form-control" id="inputEmail" name="email" value="test@test.com" placeholder="" required>
+                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="" required>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="inputFirstname">Prénom <small class="text-default">*</small></label>
-                                <input type="text" class="form-control" id="inputFirstname" value="test" name="firstname" placeholder="" required>
+                                <input type="text" class="form-control" id="inputFirstname" name="firstname" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="inputLastname">Nom <small class="text-default">*</small></label>
-                                <input type="text" class="form-control" id="inputLastname" value="test" name="lastname" placeholder="" required>
+                                <input type="text" class="form-control" id="inputLastname" name="lastname" placeholder="" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputStudy">Niveau d'études <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputStudy" name="degree" value="5" required>
+                        <select class="form-control" id="inputStudy" name="degree" required>
                             <option value="">Sélectionnez un niveau d'études...</option>
                             @foreach ($degrees as $degree)
                             <option value="{{$degree->id}}">{{$degree->name}}</option>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputRegion">Région <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputRegion" name="region" value="5" required>
+                        <select class="form-control" id="inputRegion" name="region" value="-1" required>
                             <option value="">Sélectionnez une région...</option>
                             <option value="-1" selected>France entière</option>
                             @foreach ($regions as $region)
@@ -90,7 +90,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputDep">Département <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputDep" name="department" value="5" required>
+                        <select class="form-control" id="inputDep" name="department" value="-1" required>
                             <option value="">Sélectionnez un département...</option>
                             <option value="-1" selected>France entière</option>
                             @foreach ($departments as $department)
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputFonction">Domaine d'expérience <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputFonction" name="field" value="5" required>
+                        <select class="form-control" id="inputFonction" name="field" required>
                             <option value="">Sélectionnez un domaine d'expérience...</option>
                             @foreach ($fields as $field)
                             <option value="{{$field->id}}">{{$field->name}}</option>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputJob">Fonction <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputJob" name="job" value="5" required>
+                        <select class="form-control" id="inputJob" name="job" required>
                             <option value="">Sélectionnez une fonction...</option>
                             @foreach ($jobs as $job)
                             <option value="{{$job->id}}">{{$job->name}}</option>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputSearched">Fonction recherchée <small class="text-default">*</small></label>
-                        <select class="form-control" id="inputSearched" value="5" name="target" required>
+                        <select class="form-control" id="inputSearched" name="target" required>
                             <option value="">Sélectionnez une fonction recherchée...</option>
                             @foreach ($targets as $target)
                             <option value="{{$target->id}}">{{$target->name}}</option>
